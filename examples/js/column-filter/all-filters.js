@@ -46,12 +46,7 @@ export default class AllFilters extends React.Component {
     return (
       <BootstrapTable data={ products }>
         <TableHeaderColumn dataField='id' isKey={ true }>Product ID</TableHeaderColumn>
-        <TableHeaderColumn dataField='name' filter={ { type: 'TextFilter', placeholder: 'Please enter a value' } }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='name' filter={ { type: 'RegexFilter', placeholder: 'Please enter a regex' } }>Product Name</TableHeaderColumn>
-        <TableHeaderColumn dataField='quality' filter={ { type: 'SelectFilter', options: qualityType } } dataFormat={ enumFormatter } formatExtraData={ qualityType }>Product Quality</TableHeaderColumn>
-        <TableHeaderColumn dataField='price' filter={ { type: 'NumberFilter', delay: 1000 } }>Product Price</TableHeaderColumn>
-        <TableHeaderColumn dataField='satisfaction' filter={ { type: 'NumberFilter', options: satisfaction } }>Buyer Satisfaction</TableHeaderColumn>
-        <TableHeaderColumn dataField='inStockDate' filter={ { type: 'DateFilter' } } dataFormat={ dateFormatter }>In Stock From</TableHeaderColumn>
+        <TableHeaderColumn dataField='price' filter={ { type: 'NumberRangeFilter', delay: 1000 } }>Test</TableHeaderColumn>
       </BootstrapTable>
     );
   }

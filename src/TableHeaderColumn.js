@@ -8,12 +8,14 @@ import TextFilter from './filters/Text';
 import RegexFilter from './filters/Regex';
 import SelectFilter from './filters/Select';
 import NumberFilter from './filters/Number';
+import NumberRangeFilter from './filters/NumberRange';
 
 class TableHeaderColumn extends Component {
 
   constructor(props) {
     super(props);
     this.handleFilter = this.handleFilter.bind(this);
+    this.handleRangeFilter = this.handleRangeFilter.bind(this);
   }
 
   handleColumnClick = () => {
@@ -23,7 +25,15 @@ class TableHeaderColumn extends Component {
   }
 
   handleFilter(value, type) {
+    console.log('handlieFilter called. value: ' + value + ' | type: ' + type);
+    console.log('this.props.dataField: ', this.props.dataField)
     this.props.filter.emitter.handleFilter(this.props.dataField, value, type);
+  }
+
+  handleRangeFilter(values) {
+    console.log('handlieFilter called. values: ' + JSON.stringify(values));
+    console.log('dataField: ', this.props.dataField)
+    this.props.filter.emitter.handleFilter(this.props.dataField, values, 'NumberRangeFilter');
   }
 
   getFilters() {
@@ -50,6 +60,13 @@ class TableHeaderColumn extends Component {
       return (
         <NumberFilter { ...this.props.filter }
           columnName={ this.props.children } filterHandler={ this.handleFilter } />
+      );
+    }
+
+    case Const.FILTER_TYPE.NUMBER_RANGE: {
+      return (
+        <NumberRangeFilter { ...this.props.filter }
+          columnName={ this.props.children } filterHandler={ this.handleRangeFilter } />
       );
     }
     case Const.FILTER_TYPE.DATE: {

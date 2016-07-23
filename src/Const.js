@@ -30,6 +30,7 @@ export default {
     REGEX: 'RegexFilter',
     SELECT: 'SelectFilter',
     NUMBER: 'NumberFilter',
+    NUMBER_RANGE: 'NumberRangeFilter',
     DATE: 'DateFilter',
     CUSTOM: 'CustomFilter'
   }

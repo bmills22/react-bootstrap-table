@@ -302,9 +302,6 @@ export class TableDataStore {
       break;
     }
     case '>=': {
-      // console.log(targetVal);
-      // console.log(filterVal);
-      // console.log(filterVal.getDate());
       if (targetVal < filterVal) {
         valid = false;
       }
@@ -385,13 +382,20 @@ export class TableDataStore {
     this.filteredData = source.filter( row => {
       let valid = true;
       let filterVal;
+      let filterMinVal;
+      let filterMaxVal;
       for (const key in filterObj) {
         let targetVal = row[key];
         if (targetVal === null) return false;
-
         switch (filterObj[key].type) {
         case Const.FILTER_TYPE.NUMBER: {
           filterVal = filterObj[key].value.number;
+          break;
+        }
+
+        case Const.FILTER_TYPE.NUMBER_RANGE: {
+          filterMinVal = filterObj[key].value.minNumber;
+          filterMaxVal = filterObj[key].value.maxNumber;
           break;
         }
         case Const.FILTER_TYPE.CUSTOM: {
@@ -428,10 +432,19 @@ export class TableDataStore {
             targetVal = format(row[key], row, formatExtraData);
           }
         }
-
+        // Checks each value one by one to see if it meets filter criteria
+        // targetVal: data in table being checked
+        // filterVal: inputted number checking the filterVal
+        // value.comparator: comparator
         switch (filterObj[key].type) {
         case Const.FILTER_TYPE.NUMBER: {
           valid = this.filterNumber(targetVal, filterVal, filterObj[key].value.comparator);
+          break;
+        }
+        case Const.FILTER_TYPE.NUMBER_RANGE: {
+          valid = this.filterNumber(targetVal, filterMinVal, '>=');
+          if(valid)
+            valid = this.filterNumber(targetVal, filterMaxVal, '<=');
           break;
         }
         case Const.FILTER_TYPE.DATE: {

@@ -1,6 +1,5 @@
 {
   "parser": "babel-eslint",
-  "extends": "eslint-config-airbnb",
   "plugins": ["react"],
   "env": {
     "browser": true,
@@ -13,7 +12,6 @@
   },
   "rules": {
     "react/display-name": [2, { "acceptTranspilerName": true }],
-    "react/jsx-curly-spacing": [2, "always"],
     "react/jsx-no-duplicate-props": 2,
     "react/jsx-no-undef": 2,
     "react/jsx-quotes": 0,
@@ -37,8 +35,6 @@
     "jsx-quotes": [2, "prefer-single"],
     "comma-dangle": [2, "never"],
     "indent": [2, 2],
-    "object-curly-spacing": [2, "always"],
-    "array-bracket-spacing": [2, "always"],
     "no-undef": 2,
     "no-underscore-dangle": 0,
     "func-names": 0,

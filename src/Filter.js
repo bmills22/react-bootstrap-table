@@ -9,7 +9,7 @@ export class Filter extends EventEmitter {
 
   handleFilter(dataField, value, type) {
     const filterType = type || Const.FILTER_TYPE.CUSTOM;
-
+    console.log('filterType: ', type);
     if (value !== null && typeof value === 'object') {
       // value of the filter is an object
       let hasValue = true;
